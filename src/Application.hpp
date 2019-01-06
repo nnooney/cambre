@@ -10,8 +10,13 @@
 #ifndef _NOONCRAFT_APPLICATION_H_
 #define _NOONCRAFT_APPLICATION_H_
 
+#include <vector>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+#include "ShaderProgram.hpp"
+#include "RenderInterface.hpp"
 
 /// @class Application
 /// @brief The application context manager.
@@ -38,6 +43,17 @@ public:
     /// scene.
     void run(void);
 
+    /// @brief Use the ShaderProgram for rendering the application.
+    ///
+    /// This call saves the shader program for rendering via the application.
+    void useShader(ShaderProgram shader);
+
+    /// @brief Add a RenderInterface to be rendered by the Application.
+    ///
+    /// This function adds a RenderInterface to the Application so that it will
+    /// be rendered when the run method is calld.
+    void addRenderer(RenderInterface *renderer);
+
     /// @brief Prints the version info for the application.
     ///
     /// This function prints the version of GLFW and OpenGL used by the
@@ -45,8 +61,14 @@ public:
     void printVersionInfo(void);
 
 private:
-    /// The GLFW Window instance
+    /// @brief The GLFW Window instance.
     GLFWwindow *mpWindow;
+
+    /// @brief The Shader Program used by this application.
+    ShaderProgram mShaderProgram;
+
+    /// @brief The RenderInterfaces that this application will render.
+    std::vector<RenderInterface *>mRenderInterfaces;
 };
 
 #endif

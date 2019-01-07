@@ -64,6 +64,13 @@ Application::~Application(void)
 
 void Application::run(void)
 {
+    GLuint uMVP;
+
+    // Configure OpenGL
+    glEnable(GL_DEPTH_TEST);
+
+    uMVP = glGetUniformLocation(mShaderProgram.getProgram(), "MVP");
+
     // Perform RenderInterface Initialization
     for (RenderInterface *renderer : mRenderInterfaces)
     {
@@ -77,11 +84,21 @@ void Application::run(void)
         GLint width, height;
 
         glfwGetFramebufferSize(mpWindow, &width, &height);
+        GLfloat aspectRatio = (float)width/height;
         glViewport(0, 0, width, height);
-        glClearColor(1.0, 1.0, 1.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.0, 0.0, 0.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glUseProgram(mShaderProgram.getProgram());
+
+        glm::mat4 view = glm::lookAt(
+            glm::vec3(4.0, 4.0, 4.0),
+            glm::vec3(0.0, 0.0, 0.0),
+            glm::vec3(0.0, 1.0, 0.0)
+        );
+        glm::mat4 proj = glm::perspective(
+            glm::radians(45.0f), aspectRatio, 0.1f, 100.0f);
+        glUniformMatrix4fv(uMVP, 1, GL_FALSE, glm::value_ptr(proj * view));
 
         // Perform RenderInterface Rendering
         for (RenderInterface *renderer : mRenderInterfaces)

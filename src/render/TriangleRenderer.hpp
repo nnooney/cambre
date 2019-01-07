@@ -1,22 +1,22 @@
 ////////////////////////////////////////////////////////////////////////////////
-/// @file TriangleRender.hpp
+/// @file TriangleRenderer.hpp
 /// @brief A RenderInterface implementation to draw a triangle.
 ///
 /// This file contains the basic Triangle Rendering example from OpenGL.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_TRIANGLE_RENDER_H_
-#define _NOONCRAFT_TRIANGLE_RENDER_H_
+#ifndef _NOONCRAFT_TRIANGLE_RENDERER_H_
+#define _NOONCRAFT_TRIANGLE_RENDERER_H_
 
 #include "RenderInterface.hpp"
 
-class TriangleRender : public RenderInterface
+class TriangleRenderer : public RenderInterface
 {
 public:
     /// @brief The default constructor.
     ///
     /// Construct and allocate the buffers needed for this object.
-    TriangleRender(void);
+    TriangleRenderer(void);
 
     /// @brief The initialize function.
     ///

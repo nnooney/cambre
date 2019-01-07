@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-/// @file TriangleRender.cpp
+/// @file TriangleRenderer.cpp
 /// @brief A RenderInterface implementation to draw a triangle.
 ///
 /// This file contains the basic Triangle Rendering example from OpenGL.
@@ -8,15 +8,15 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "TriangleRender.hpp"
+#include "TriangleRenderer.hpp"
 
-TriangleRender::TriangleRender(void)
+TriangleRenderer::TriangleRenderer(void)
 {
     mVbo = 0;
     mVao = 0;
 }
 
-void TriangleRender::initialize(void)
+void TriangleRenderer::initialize(void)
 {
     GLfloat vertices[] = {
         -0.8, -0.8,  0.0,
@@ -32,7 +32,7 @@ void TriangleRender::initialize(void)
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 }
 
-void TriangleRender::render(void)
+void TriangleRenderer::render(void)
 {
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, mVbo);

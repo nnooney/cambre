@@ -17,7 +17,8 @@ find_package(glm REQUIRED)
 target_sources(nooncraft
 PUBLIC
     src/render/RenderInterface.cpp
-    src/render/TriangleRender.cpp
+    src/render/TriangleRenderer.cpp
+    src/render/CubeRenderer.cpp
     src/utils/CheckError.cpp
     src/ShaderProgram.cpp
     src/Application.cpp

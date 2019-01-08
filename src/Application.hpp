@@ -17,6 +17,7 @@
 
 #include "ShaderProgram.hpp"
 #include "RenderInterface.hpp"
+#include "Camera.hpp"
 
 /// @class Application
 /// @brief The application context manager.
@@ -36,6 +37,11 @@ public:
     ///
     /// The destructor handles the termination of the GLFW window and library.
     ~Application(void);
+
+    /// @brief Attach Window Callbacks.
+    ///
+    /// This function attaches the callbacks necessary to handle GLFW events.
+    void attachCallbacks(void);
 
     /// @brief Run the Application Loop.
     ///
@@ -69,6 +75,20 @@ private:
 
     /// @brief The RenderInterfaces that this application will render.
     std::vector<RenderInterface *>mRenderInterfaces;
+
+    /// @brief The Camera used to view the world.
+    static Camera mCamera;
+
+    /// @brief The GLFW Key Event Callback.
+    ///
+    /// This function processes Key Events.
+    static void KeyCallback(GLFWwindow *window, int key, int scancode,
+        int action, int modifiers);
+
+    /// @brief The GLFW Mouse Event Callback.
+    ///
+    /// This function processes Mouse Events.
+    static void MouseCallback(GLFWwindow *window, double xpos, double ypos);
 };
 
 #endif

@@ -16,9 +16,74 @@
 #include "ApplicationException.hpp"
 #include "Application.hpp"
 
+Camera Application::mCamera;
+
+static bool updatePosition = true;
+
 static void ErrorCallback(int error, const char *msg)
 {
     std::cerr << "Error " << error << ": " << msg << std::endl;
+}
+
+void Application::KeyCallback(GLFWwindow *window, int key, int scancode,
+    int action, int modifiers)
+{
+    static const float SENSITIVITY = 0.2;
+    glm::vec3 deltaPosition(0.0, 0.0, 0.0);
+
+    if (key == GLFW_KEY_W && action == GLFW_PRESS)
+    {
+        deltaPosition.z += SENSITIVITY;
+    }
+    else if (key == GLFW_KEY_S && action == GLFW_PRESS)
+    {
+        deltaPosition.z -= SENSITIVITY;
+    }
+    else if (key == GLFW_KEY_A && action == GLFW_PRESS)
+    {
+        deltaPosition.x += SENSITIVITY;
+    }
+    else if (key == GLFW_KEY_D && action == GLFW_PRESS)
+    {
+        deltaPosition.x -= SENSITIVITY;
+    }
+    else if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+    {
+        deltaPosition.y += SENSITIVITY;
+    }
+    else if (key == GLFW_KEY_LEFT_SHIFT && action == GLFW_PRESS)
+    {
+        deltaPosition.y -= SENSITIVITY;
+    }
+    else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    {
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        updatePosition = false;
+    }
+
+    mCamera.updatePosition(deltaPosition);
+}
+
+void Application::MouseCallback(GLFWwindow *window, double xpos, double ypos)
+{
+    static bool firstUpdate = true;
+    static float prevX;
+    static float prevY;
+    glm::vec2 deltaDirection(0.0, 0.0);
+
+    if (firstUpdate == false)
+    {
+        deltaDirection.x = xpos - prevX;
+        deltaDirection.y = prevY - ypos;
+        if (updatePosition)
+        {
+            mCamera.updateDirection(deltaDirection);
+        }
+    }
+
+    prevX = xpos;
+    prevY = ypos;
+    firstUpdate = false;
 }
 
 Application::Application(void)
@@ -51,6 +116,8 @@ Application::Application(void)
     {
         throw ApplicationException("GLEW Initialization Failure");
     }
+
+    attachCallbacks();
 }
 
 Application::~Application(void)
@@ -60,6 +127,13 @@ Application::~Application(void)
 
     // Terminate GLFW
     glfwTerminate();
+}
+
+void Application::attachCallbacks(void)
+{
+    glfwSetKeyCallback(mpWindow, KeyCallback);
+    glfwSetInputMode(mpWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPosCallback(mpWindow, MouseCallback);
 }
 
 void Application::run(void)
@@ -91,11 +165,7 @@ void Application::run(void)
 
         glUseProgram(mShaderProgram.getProgram());
 
-        glm::mat4 view = glm::lookAt(
-            glm::vec3(4.0, 4.0, 4.0),
-            glm::vec3(0.0, 0.0, 0.0),
-            glm::vec3(0.0, 1.0, 0.0)
-        );
+        glm::mat4 view = mCamera.getView();
         glm::mat4 proj = glm::perspective(
             glm::radians(45.0f), aspectRatio, 0.1f, 100.0f);
         glUniformMatrix4fv(uMVP, 1, GL_FALSE, glm::value_ptr(proj * view));

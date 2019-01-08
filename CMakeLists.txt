@@ -21,6 +21,7 @@ PUBLIC
     src/render/CubeRenderer.cpp
     src/utils/CheckError.cpp
     src/ShaderProgram.cpp
+    src/Camera.cpp
     src/Application.cpp
     src/main.cpp)
 

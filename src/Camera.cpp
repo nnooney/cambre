@@ -6,6 +6,8 @@
 /// that the user can move around.
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <iostream>
+
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Camera.hpp"
@@ -13,30 +15,31 @@
 Camera::Camera(void)
 {
     mPosition = glm::vec3(0.0, 0.0, -4.0);
-    mYaw = 90;
-    mPitch = 0;
-    mFacing = glm::normalize(glm::vec3(
-        glm::cos(glm::radians(mPitch)) * glm::cos(glm::radians(mYaw)),
-        glm::sin(glm::radians(mPitch)),
-        glm::cos(glm::radians(mPitch)) * glm::sin(glm::radians(mYaw))
-    ));
+    mFacing = glm::vec3(0.0, 0.0, 1.0);
 }
 
-void Camera::updatePosition(glm::vec3 deltaPosition)
+void Camera::setPosition(glm::vec3 aPosition)
 {
-    mPosition += deltaPosition;
+    mPosition = aPosition;
+    printData();
 }
 
-void Camera::updateDirection(glm::vec2 deltaDirection)
+glm::vec3 Camera::getPosition(void)
 {
-    mYaw += deltaDirection.x;
-    mPitch += deltaDirection.y;
+    return mPosition;
+}
 
-    mFacing = glm::normalize(glm::vec3(
-        glm::cos(glm::radians(mPitch)) * glm::cos(glm::radians(mYaw)),
-        glm::sin(glm::radians(mPitch)),
-        glm::cos(glm::radians(mPitch)) * glm::sin(glm::radians(mYaw))
-    ));
+
+void Camera::setFacing(glm::vec3 aFacing)
+{
+    mFacing = glm::normalize(aFacing);
+    printData();
+}
+
+
+glm::vec3 Camera::getFacing(void)
+{
+    return mFacing;
 }
 
 glm::mat4 Camera::getView(void)
@@ -45,4 +48,11 @@ glm::mat4 Camera::getView(void)
         mPosition,
         mPosition + mFacing,
         glm::vec3(0.0, 1.0, 0.0));
+}
+
+void Camera::printData(void)
+{
+    std::cout << "Pos: (" << mPosition.x << ", " << mPosition.y << ", " <<
+        mPosition.z << ") Dir: (" << mFacing.x << ", " << mFacing.y << ", " <<
+        mFacing.z << ")" << std::endl;
 }

@@ -16,20 +16,28 @@ find_package(glm REQUIRED)
 # Source Files
 target_sources(nooncraft
 PUBLIC
+    src/commands/CameraCommands.cpp
+    src/commands/Command.cpp
+    src/events/EventObserver.cpp
     src/render/RenderInterface.cpp
     src/render/TriangleRenderer.cpp
     src/render/CubeRenderer.cpp
     src/utils/CheckError.cpp
     src/ShaderProgram.cpp
     src/Camera.cpp
+    src/CameraController.cpp
+    src/InputManager.cpp
     src/Application.cpp
     src/main.cpp)
 
 # Include Directories
 target_include_directories(nooncraft
 PUBLIC
+    src/commands/
+    src/events/
     src/render/
     src/utils/
+    src/
     ${OPENGL_INCLUDE_DIRS}
     ${GLEW_INCLUDE_DIRS}
     ${GLM_INCLUDE_DIRS})

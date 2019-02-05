@@ -11,6 +11,8 @@
 
 #include <glm/glm.hpp>
 
+#include "InputManager.hpp"
+
 class Camera
 {
 public:
@@ -19,17 +21,25 @@ public:
     /// Constructs a camera instance.
     Camera(void);
 
-    /// @brief Updates the position of the camera.
+    /// @brief Sets the position of the camera.
     ///
-    /// This function updates the position of the camera by using the vector and
-    /// combining it with the camera's current position.
-    void updatePosition(glm::vec3 deltaPosition);
+    /// This function sets the position of the Camera to the new position.
+    void setPosition(glm::vec3 aPosition);
 
-    /// @brief Updates the direction the camera is facing.
+    /// @brief Gets the position of the camera.
     ///
-    /// This function updates the direction the camera is facing. The vector
-    /// provided contains the delta yaw and delta pitch.
-    void updateDirection(glm::vec2 deltaDirection);
+    /// This function gets the position of the Camera.
+    glm::vec3 getPosition(void);
+
+    /// @brief Sets the direction of the camera.
+    ///
+    /// This function sets the direction the Camera is facing.
+    void setFacing(glm::vec3 aFacing);
+
+    /// @brief Gets the direction of the camera.
+    ///
+    /// This function gets the direction the Camera is facing.
+    glm::vec3 getFacing(void);
 
     /// @brief Retrieves the View matrix for rendering.
     ///
@@ -44,11 +54,7 @@ private:
     /// @brief The direction the camera is facing.
     glm::vec3 mFacing;
 
-    /// @brief The yaw of the camera.
-    float mYaw;
-
-    /// @brief The pitch of the camera.
-    float mPitch;
+    void printData(void);
 };
 
 #endif

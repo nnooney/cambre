@@ -18,6 +18,8 @@
 #include "ShaderProgram.hpp"
 #include "RenderInterface.hpp"
 #include "Camera.hpp"
+#include "CameraController.hpp"
+#include "InputManager.hpp"
 
 /// @class Application
 /// @brief The application context manager.
@@ -38,11 +40,6 @@ public:
     /// The destructor handles the termination of the GLFW window and library.
     ~Application(void);
 
-    /// @brief Attach Window Callbacks.
-    ///
-    /// This function attaches the callbacks necessary to handle GLFW events.
-    void attachCallbacks(void);
-
     /// @brief Run the Application Loop.
     ///
     /// The main application loop listens for input events and renders the
@@ -60,6 +57,12 @@ public:
     /// be rendered when the run method is calld.
     void addRenderer(RenderInterface *renderer);
 
+    /// @brief Attaches an Input Manager to the Application's window.
+    ///
+    /// This function will register an input manager's low-level functions with
+    /// the application's window.
+    void registerInputs(InputManager manager);
+
     /// @brief Prints the version info for the application.
     ///
     /// This function prints the version of GLFW and OpenGL used by the
@@ -74,20 +77,32 @@ private:
     ShaderProgram mShaderProgram;
 
     /// @brief The RenderInterfaces that this application will render.
-    std::vector<RenderInterface *>mRenderInterfaces;
+    std::vector<RenderInterface *> mRenderInterfaces;
 
     /// @brief The Camera used to view the world.
-    static Camera mCamera;
+    Camera mCamera;
 
-    /// @brief The GLFW Key Event Callback.
+    /// @brief The Camera Controller that gives life to the camera.
+    CameraController mCameraController;
+
+    /// @brief The InputManager to handle user input.
     ///
-    /// This function processes Key Events.
+    /// Note that the InputManager is static in order to use it for the
+    /// callbacks that the GLFW library provides. A side effect means that there
+    /// can only be one InputManager.
+    static InputManager mInputManager;
+
+    /// @brief The low-level key callback.
+    ///
+    /// This function receives GLFW Key Events and forwards them to the
+    /// attached InputManager.
     static void KeyCallback(GLFWwindow *window, int key, int scancode,
         int action, int modifiers);
 
-    /// @brief The GLFW Mouse Event Callback.
+    /// @brief The low-level mouse callback.
     ///
-    /// This function processes Mouse Events.
+    /// This function receives GLFW Mouse Events and forwards them to the
+    /// attached InputManager.
     static void MouseCallback(GLFWwindow *window, double xpos, double ypos);
 };
 

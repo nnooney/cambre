@@ -18,20 +18,20 @@
 class CameraController : public EventObserver
 {
 public:
-    CameraController(Camera *camera);
+    CameraController(void);
     void registerWith(InputManager *manager);
     virtual void onEvent(ApplicationEventStruct event);
     void update(void);
+    glm::mat4 getView(void);
+
 private:
-    Camera *mpCamera;
+    Camera mCamera;
     std::vector<ApplicationEventType> mEventStates;
     ApplicationEventDataStruct mCursorData;
     ApplicationEventDataStruct mPrevCursorData;
 
     void updatePosition(void);
     void updateFacing(void);
-
-    CameraController(void) = delete;
 };
 
 #endif

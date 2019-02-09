@@ -11,10 +11,8 @@
 
 #include "CameraController.hpp"
 
-CameraController::CameraController(Camera *camera)
+CameraController::CameraController(void)
 {
-    mpCamera = camera;
-
     mEventStates.resize(AE_MAX_EVENT_ENUM);
 }
 
@@ -48,10 +46,15 @@ void CameraController::update(void)
     updateFacing();
 }
 
+glm::mat4 CameraController::getView(void)
+{
+    return mCamera.getView();
+}
+
 void CameraController::updatePosition(void)
 {
-    glm::vec3 position = mpCamera->getPosition();
-    glm::vec3 direction = mpCamera->getFacing();
+    glm::vec3 position = mCamera.getPosition();
+    glm::vec3 direction = mCamera.getFacing();
     glm::vec3 deltaPos = glm::vec3(0);
 
     Command *cmd;
@@ -88,15 +91,15 @@ void CameraController::updatePosition(void)
     }
 
     // Create the command.
-    cmd = new MoveCommand(mpCamera, position + deltaPos);
+    cmd = new MoveCommand(&mCamera, position + deltaPos);
     cmd->execute();
     delete cmd;
 }
 
 void CameraController::updateFacing(void)
 {
-    float yaw = mpCamera->getYaw();
-    float pitch = mpCamera->getPitch();
+    float yaw = mCamera.getYaw();
+    float pitch = mCamera.getPitch();
 
     Command *cmd;
 
@@ -121,7 +124,7 @@ void CameraController::updateFacing(void)
         pitch += dy;
 
         // Create the command.
-        cmd = new LookCommand(mpCamera, yaw, pitch);
+        cmd = new LookCommand(&mCamera, yaw, pitch);
         cmd->execute();
         delete cmd;
     }

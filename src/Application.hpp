@@ -80,9 +80,6 @@ private:
     /// @brief The RenderInterfaces that this application will render.
     std::vector<RenderInterface *> mRenderInterfaces;
 
-    /// @brief The Camera used to view the world.
-    Camera mCamera;
-
     /// @brief The Camera Controller that gives life to the camera.
     CameraController mCameraController;
 

@@ -25,7 +25,7 @@ static void ErrorCallback(int error, const char *msg)
     std::cerr << "GLFW Error " << error << ": " << msg << std::endl;
 }
 
-Application::Application(void) : mCameraController(&mCamera)
+Application::Application(void)
 {
     // Initialize GLFW
     if (!glfwInit())
@@ -179,7 +179,7 @@ void Application::render(void)
 
     glUseProgram(mShaderProgram.getProgram());
 
-    glm::mat4 view = mCamera.getView();
+    glm::mat4 view = mCameraController.getView();
     glm::mat4 proj = glm::perspective(
         glm::radians(45.0f), aspectRatio, 0.1f, 100.0f);
     glUniformMatrix4fv(mUniformMVP, 1, GL_FALSE, glm::value_ptr(proj * view));

@@ -16,6 +16,8 @@ find_package(glm REQUIRED)
 # Source Files
 target_sources(nooncraft
 PUBLIC
+    src/camera/camera.cpp
+    src/camera/CameraController.cpp
     src/commands/CameraCommands.cpp
     src/commands/Command.cpp
     src/events/EventObserver.cpp
@@ -25,8 +27,6 @@ PUBLIC
     src/utils/CheckError.cpp
     src/utils/PrintVector.cpp
     src/ShaderProgram.cpp
-    src/Camera.cpp
-    src/CameraController.cpp
     src/InputManager.cpp
     src/Application.cpp
     src/main.cpp)
@@ -34,6 +34,7 @@ PUBLIC
 # Include Directories
 target_include_directories(nooncraft
 PUBLIC
+    src/camera/
     src/commands/
     src/events/
     src/render/

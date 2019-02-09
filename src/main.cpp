@@ -9,8 +9,8 @@ int main()
     Application app;
 
     ShaderProgram shader(
-        "./src/shaders/vertex.glsl",
-        "./src/shaders/fragment.glsl");
+        "./src/render/shaders/vertex.glsl",
+        "./src/render/shaders/fragment.glsl");
     app.useShader(shader);
 
     CubeRenderer cube;

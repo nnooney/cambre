@@ -13,7 +13,7 @@
 
 static const glm::vec3 VECTOR_UP = glm::vec3(0.0, 1.0, 0.0);
 static const float MOVEMENT_SPEED = 0.5;
-static const float LOOK_SPEED = 0.5;
+static const float LOOK_SPEED = 0.25;
 
 CameraController::CameraController(void)
 {

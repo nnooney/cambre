@@ -8,6 +8,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -76,12 +78,13 @@ void Application::registerInputs(InputManager manager)
 
 void Application::run(void)
 {
-    GLuint uMVP;
+    double curTime, updateTime;
+    const double delta = 1.0/60.0;
 
     // Configure OpenGL
     glEnable(GL_DEPTH_TEST);
 
-    uMVP = glGetUniformLocation(mShaderProgram.getProgram(), "MVP");
+    mUniformMVP = glGetUniformLocation(mShaderProgram.getProgram(), "MVP");
 
     // Perform RenderInterface Initialization
     for (RenderInterface *renderer : mRenderInterfaces)
@@ -91,31 +94,27 @@ void Application::run(void)
 
     // The main loop
     std::cout << "Beginning Main Loop ..." << std::endl;
+    updateTime = glfwGetTime();
     while (!glfwWindowShouldClose(mpWindow))
     {
-        GLint width, height;
-
-        glfwGetFramebufferSize(mpWindow, &width, &height);
-        GLfloat aspectRatio = (float)width/height;
-        glViewport(0, 0, width, height);
-        glClearColor(0.0, 0.0, 0.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glUseProgram(mShaderProgram.getProgram());
-
-        glm::mat4 view = mCamera.getView();
-        glm::mat4 proj = glm::perspective(
-            glm::radians(45.0f), aspectRatio, 0.1f, 100.0f);
-        glUniformMatrix4fv(uMVP, 1, GL_FALSE, glm::value_ptr(proj * view));
-
-        // Perform RenderInterface Rendering
-        for (RenderInterface *renderer : mRenderInterfaces)
+        curTime = glfwGetTime();
+        if (curTime >= updateTime)
         {
-            renderer->render();
+            updateTime += delta;
+            update();
+            if (curTime < updateTime)
+            {
+                render();
+            }
         }
-
-        glfwSwapBuffers(mpWindow);
-        glfwPollEvents();
+        else
+        {
+            int ms = (updateTime - curTime) * 1000;
+            if (ms > 0)
+            {
+                std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+            }
+        }
     }
     std::cout << "Exiting Main Loop ..." << std::endl;
 
@@ -156,6 +155,42 @@ void Application::printVersionInfo(void)
         << major << "." << minor << "." << revision << std::endl;
 
     std::cout << "OpenGL Version " << glGetString(GL_VERSION) << std::endl;
+
+    std::cout << "GLM Version " << GLM_VERSION_MAJOR << "." << GLM_VERSION_MINOR
+        << "." << GLM_VERSION_PATCH << "." << GLM_VERSION_REVISION << std::endl;
+}
+
+void Application::update(void)
+{
+    mCameraController.update();
+
+    glfwPollEvents();
+}
+
+void Application::render(void)
+{
+    GLint width, height;
+
+    glfwGetFramebufferSize(mpWindow, &width, &height);
+    GLfloat aspectRatio = (float)width/height;
+    glViewport(0, 0, width, height);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glUseProgram(mShaderProgram.getProgram());
+
+    glm::mat4 view = mCamera.getView();
+    glm::mat4 proj = glm::perspective(
+        glm::radians(45.0f), aspectRatio, 0.1f, 100.0f);
+    glUniformMatrix4fv(mUniformMVP, 1, GL_FALSE, glm::value_ptr(proj * view));
+
+    // Perform RenderInterface Rendering
+    for (RenderInterface *renderer : mRenderInterfaces)
+    {
+        renderer->render();
+    }
+
+    glfwSwapBuffers(mpWindow);
 }
 
 void Application::KeyCallback(GLFWwindow *window, int key, int scancode,

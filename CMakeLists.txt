@@ -23,6 +23,7 @@ PUBLIC
     src/render/TriangleRenderer.cpp
     src/render/CubeRenderer.cpp
     src/utils/CheckError.cpp
+    src/utils/PrintVector.cpp
     src/ShaderProgram.cpp
     src/Camera.cpp
     src/CameraController.cpp

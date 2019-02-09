@@ -9,6 +9,8 @@
 #ifndef _NOONCRAFT_CAMERA_CONTROLLER_H_
 #define _NOONCRAFT_CAMERA_CONTROLLER_H_
 
+#include <vector>
+
 #include "Camera.hpp"
 #include "EventObserver.hpp"
 #include "InputManager.hpp"
@@ -19,8 +21,15 @@ public:
     CameraController(Camera *camera);
     void registerWith(InputManager *manager);
     virtual void onEvent(ApplicationEventStruct event);
+    void update(void);
 private:
     Camera *mpCamera;
+    std::vector<ApplicationEventType> mEventStates;
+    ApplicationEventDataStruct mCursorData;
+    ApplicationEventDataStruct mPrevCursorData;
+
+    void updatePosition(void);
+    void updateFacing(void);
 
     CameraController(void) = delete;
 };

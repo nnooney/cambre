@@ -23,11 +23,11 @@ typedef enum ApplicationEventEnum
 
 typedef enum ApplicationEventType
 {
+    AE_NONE = 0,
     AE_BEGIN,
     AE_END,
     AE_REPEAT,
     AE_SINGLE,
-    AE_NONE,
     AE_MAX_EVENT_TYPE_ENUM
 } app_event_type_t;
 

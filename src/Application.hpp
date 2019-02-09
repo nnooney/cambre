@@ -75,6 +75,7 @@ private:
 
     /// @brief The Shader Program used by this application.
     ShaderProgram mShaderProgram;
+    GLuint mUniformMVP;
 
     /// @brief The RenderInterfaces that this application will render.
     std::vector<RenderInterface *> mRenderInterfaces;
@@ -91,6 +92,18 @@ private:
     /// callbacks that the GLFW library provides. A side effect means that there
     /// can only be one InputManager.
     static InputManager mInputManager;
+
+    /// @brief The Global Update Loop.
+    ///
+    /// This function is the entrypoint for running the game logic one step. It
+    /// is a part of the application loop.
+    void update(void);
+
+    /// @brief The Global Render Loop.
+    ///
+    /// This function is the entrypoint for rendering the current game state. It
+    /// is a part of the application loop.
+    void render(void);
 
     /// @brief The low-level key callback.
     ///

@@ -9,15 +9,17 @@
 #include "CameraCommands.hpp"
 
 
-LookCommand::LookCommand(Camera *camera, glm::vec3 target)
+LookCommand::LookCommand(Camera *camera, float yaw, float pitch)
 {
     mCamera = camera;
-    mTarget = target;
+    mYaw = yaw;
+    mPitch = pitch;
 }
 
 void LookCommand::execute(void)
 {
-    mCamera->setFacing(mTarget);
+    mCamera->setYaw(mYaw);
+    mCamera->setPitch(mPitch);
 }
 
 

@@ -31,15 +31,31 @@ public:
     /// This function gets the position of the Camera.
     glm::vec3 getPosition(void);
 
-    /// @brief Sets the direction of the camera.
+    /// @brief Gets the direction the camera is facing.
     ///
-    /// This function sets the direction the Camera is facing.
-    void setFacing(glm::vec3 aFacing);
-
-    /// @brief Gets the direction of the camera.
-    ///
-    /// This function gets the direction the Camera is facing.
+    /// This function gets the direction the camera is facing. Anytime the yaw
+    /// or pitch is changed, the direction the camera is facing will be updated.
     glm::vec3 getFacing(void);
+
+    /// @brief Sets the yaw of the camera.
+    ///
+    /// This function sets the yaw of the Camera.
+    void setYaw(float aYaw);
+
+    /// @brief Gets the yaw of the camera.
+    ///
+    /// This function gets the yaw of the Camera.
+    float getYaw(void);
+
+    /// @brief Sets the pitch of the camera.
+    ///
+    /// This function sets the pitch of the Camera.
+    void setPitch(float aPitch);
+
+    /// @brief Gets the pitch of the camera.
+    ///
+    /// This function gets the pitch of the Camera.
+    float getPitch(void);
 
     /// @brief Retrieves the View matrix for rendering.
     ///
@@ -54,6 +70,13 @@ private:
     /// @brief The direction the camera is facing.
     glm::vec3 mFacing;
 
+    /// @brief The Yaw of the Camera (Horizontal Rotation)
+    float mYaw;
+
+    /// @brief the Pitch of the Camera (Vertical Rotation)
+    float mPitch;
+
+    void updateFacing(void);
     void printData(void);
 };
 

@@ -19,11 +19,12 @@
 class LookCommand : public Command
 {
 public:
-    LookCommand(Camera *camera, glm::vec3 target);
+    LookCommand(Camera *camera, float yaw, float pitch);
     virtual void execute(void);
 private:
     Camera *mCamera;
-    glm::vec3 mTarget;
+    float mYaw;
+    float mPitch;
 };
 
 /// @class MoveCommand

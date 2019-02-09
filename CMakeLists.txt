@@ -22,8 +22,8 @@ PUBLIC
     src/commands/Command.cpp
     src/events/EventObserver.cpp
     src/render/RenderInterface.cpp
-    src/render/TriangleRenderer.cpp
-    src/render/CubeRenderer.cpp
+    src/render/examples/TriangleRenderer.cpp
+    src/render/examples/CubeRenderer.cpp
     src/utils/CheckError.cpp
     src/utils/PrintVector.cpp
     src/ShaderProgram.cpp
@@ -37,6 +37,7 @@ PUBLIC
     src/camera/
     src/commands/
     src/events/
+    src/render/examples
     src/render/
     src/utils/
     src/

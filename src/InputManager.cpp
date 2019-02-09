@@ -30,6 +30,8 @@ InputManager::InputManager(void)
     mKeyEventMap[GLFW_KEY_S] = AE_MOVE_BACKWARD;
     mKeyEventMap[GLFW_KEY_A] = AE_MOVE_LEFT;
     mKeyEventMap[GLFW_KEY_D] = AE_MOVE_RIGHT;
+    mKeyEventMap[GLFW_KEY_SPACE] = AE_MOVE_UP;
+    mKeyEventMap[GLFW_KEY_LEFT_SHIFT] = AE_MOVE_DOWN;
 }
 
 void InputManager::RegisterInput(

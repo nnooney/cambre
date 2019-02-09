@@ -11,6 +11,10 @@
 
 #include "CameraController.hpp"
 
+static const glm::vec3 VECTOR_UP = glm::vec3(0.0, 1.0, 0.0);
+static const float MOVEMENT_SPEED = 0.5;
+static const float LOOK_SPEED = 0.5;
+
 CameraController::CameraController(void)
 {
     mEventStates.resize(AE_MAX_EVENT_ENUM);
@@ -22,6 +26,8 @@ void CameraController::registerWith(InputManager *manager)
     manager->RegisterInput(AE_MOVE_BACKWARD, this);
     manager->RegisterInput(AE_MOVE_LEFT, this);
     manager->RegisterInput(AE_MOVE_RIGHT, this);
+    manager->RegisterInput(AE_MOVE_UP, this);
+    manager->RegisterInput(AE_MOVE_DOWN, this);
     manager->RegisterInput(AE_LOOK_AROUND, this);
 }
 
@@ -73,13 +79,21 @@ void CameraController::updatePosition(void)
     {
         deltaPos -= glm::normalize(glm::cross(
                 direction,
-                glm::vec3(0.0, 1.0, 0.0)));
+                VECTOR_UP));
     }
     if (mEventStates[AE_MOVE_RIGHT] == AE_BEGIN)
     {
         deltaPos += glm::normalize(glm::cross(
                 direction,
-                glm::vec3(0.0, 1.0, 0.0)));
+                VECTOR_UP));
+    }
+    if (mEventStates[AE_MOVE_UP] == AE_BEGIN)
+    {
+        deltaPos += VECTOR_UP;
+    }
+    if (mEventStates[AE_MOVE_DOWN] == AE_BEGIN)
+    {
+        deltaPos -= VECTOR_UP;
     }
 
     // deltaPos contains the new location to move to. In order to control the
@@ -87,7 +101,7 @@ void CameraController::updatePosition(void)
     // position.
     if (deltaPos != glm::vec3(0))
     {
-        deltaPos = glm::normalize(deltaPos);
+        deltaPos = glm::normalize(deltaPos) * MOVEMENT_SPEED;
     }
 
     // Create the command.
@@ -120,8 +134,8 @@ void CameraController::updateFacing(void)
     if (dx != 0 || dy != 0)
     {
         // Calculate the new direction.
-        yaw += dx;
-        pitch += dy;
+        yaw += dx * LOOK_SPEED;
+        pitch += dy * LOOK_SPEED;
 
         // Create the command.
         cmd = new LookCommand(&mCamera, yaw, pitch);

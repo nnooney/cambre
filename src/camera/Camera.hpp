@@ -70,6 +70,7 @@ private:
     /// @brief The direction the camera is facing.
     glm::vec3 mFacing;
 
+
     /// @brief The Yaw of the Camera (Horizontal Rotation)
     float mYaw;
 

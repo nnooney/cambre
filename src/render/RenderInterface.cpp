@@ -16,6 +16,11 @@ void RenderInterface::initialize(void)
     // Do nothing.
 }
 
+void RenderInterface::update(void)
+{
+    // Do nothing.
+}
+
 void RenderInterface::wrapup(void)
 {
     // Do nothing.

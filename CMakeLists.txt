@@ -26,6 +26,7 @@ PUBLIC
     src/render/examples/CubeRenderer.cpp
     src/utils/CheckError.cpp
     src/utils/PrintVector.cpp
+    src/world/Chunk.cpp
     src/ShaderProgram.cpp
     src/InputManager.cpp
     src/Application.cpp
@@ -40,6 +41,7 @@ PUBLIC
     src/render/examples
     src/render/
     src/utils/
+    src/world/
     src/
     ${OPENGL_INCLUDE_DIRS}
     ${GLEW_INCLUDE_DIRS}

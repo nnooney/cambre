@@ -164,6 +164,13 @@ void Application::update(void)
 {
     mCameraController.update();
 
+    // Perform RenderInterface Updating
+    for (RenderInterface *renderer : mRenderInterfaces)
+    {
+        renderer->update();
+    }
+
+
     glfwPollEvents();
 }
 

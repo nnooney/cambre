@@ -41,9 +41,6 @@ private:
     /// @brief The OpenGL Index Buffer Object
     GLuint mIbo;
 
-    /// @brief The Model View Projection Uniform in the Shader.
-    GLint mMVP;
-
     /// @brief The Vertices of the Cube.
     static constexpr GLfloat mVertexData[] = {
         // Front

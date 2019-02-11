@@ -14,7 +14,7 @@
 
 Camera::Camera(void)
 {
-    mPosition = glm::vec3(0.0, 0.0, -4.0);
+    mPosition = glm::vec3(0.0, 0.0, -10.0);
     mYaw = 90.0;
     mPitch = 0.0;
     updateFacing();

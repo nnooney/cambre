@@ -29,6 +29,8 @@ public:
     /// display loop.
     virtual void render(void) = 0;
 
+    virtual void update(void);
+
     /// @brief The wrapup function, called once after exiting the main loop.
     ///
     /// This function is called once the main loop exits, which allows the

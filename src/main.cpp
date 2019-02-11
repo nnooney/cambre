@@ -2,6 +2,7 @@
 #include "ShaderProgram.hpp"
 #include "TriangleRenderer.hpp"
 #include "CubeRenderer.hpp"
+#include "Chunk.hpp"
 #include "InputManager.hpp"
 
 int main()
@@ -9,12 +10,12 @@ int main()
     Application app;
 
     ShaderProgram shader(
-        "./src/render/shaders/vertex.glsl",
-        "./src/render/shaders/fragment.glsl");
+        "./src/render/shaders/chunk.v.glsl",
+        "./src/render/shaders/chunk.f.glsl");
     app.useShader(shader);
 
-    CubeRenderer cube;
-    app.addRenderer(&cube);
+    Chunk chunk;
+    app.addRenderer(&chunk);
 
     InputManager manager;
     app.registerInputs(manager);

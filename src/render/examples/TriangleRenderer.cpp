@@ -19,9 +19,9 @@ TriangleRenderer::TriangleRenderer(void)
 void TriangleRenderer::initialize(void)
 {
     GLfloat vertices[] = {
-        -0.8, -0.8,  0.0,
-         0.8, -0.8,  0.0,
-         0.0,  0.8,  0.0
+        -0.8f, -0.8f,  0.0f,
+         0.8f, -0.8f,  0.0f,
+         0.0f,  0.8f,  0.0f
     };
 
     glGenVertexArrays(1, &mVao);

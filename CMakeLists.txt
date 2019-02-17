@@ -7,6 +7,11 @@ project(NoonCraft)
 # Declare the NoonCraft target
 add_executable(nooncraft "")
 
+# Path Hints to the Packages
+set(GLEW_ROOT ${CMAKE_SOURCE_DIR}/lib/glew-2.1.0)
+set(glfw3_ROOT ${CMAKE_SOURCE_DIR}/lib/glfw-3.2.1)
+set(glm_ROOT ${CMAKE_SOURCE_DIR}/lib/glm-0.9.9.3)
+
 # Required Packages
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
@@ -45,10 +50,11 @@ PUBLIC
     src/
     ${OPENGL_INCLUDE_DIRS}
     ${GLEW_INCLUDE_DIRS}
+    ${GLFW_INCLUDE_DIRS}
     ${GLM_INCLUDE_DIRS})
 
 # Link Libraries
 target_link_libraries(nooncraft
     ${OPENGL_gl_LIBRARY}
     ${GLEW_LIBRARIES}
-    glfw)
+    ${GLFW_LIBRARIES})

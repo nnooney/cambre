@@ -57,8 +57,21 @@ CTestTestfile.cmake
 !.vscode/launch.json
 !.vscode/extensions.json
 
+######################################
+# VSCode CMake-tools Ninja Generator #
+######################################
+.ninja_deps
+.ninja_log
+build/build.ninja
+build/rules.ninja
+
 #######################
 # Custom Ignore Paths #
 #######################
 nooncraft
+nooncraft.ilk
+nooncraft.pdb
 docs/html/
+lib/glew-2.1.0
+lib/glfw-3.2.1
+lib/glm-0.9.9.3

@@ -33,7 +33,10 @@ void CameraController::registerWith(InputManager *manager)
 
 void CameraController::onEvent(ApplicationEventStruct event)
 {
-    mEventStates[event.code] = event.type;
+    if (event.type != AE_REPEAT)
+    {
+        mEventStates[event.code] = event.type;
+    }
 
     switch(event.code)
     {

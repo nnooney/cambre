@@ -54,9 +54,9 @@ void InputManager::KeyCallback(GLFWwindow *window, int key, int scancode,
         case GLFW_PRESS:
             event.type = AE_BEGIN;
             break;
-        // case GLFW_REPEAT:
-        //     event.type = AE_REPEAT;
-        //     break;
+        case GLFW_REPEAT:
+            event.type = AE_REPEAT;
+            break;
         case GLFW_RELEASE:
             event.type = AE_END;
             break;

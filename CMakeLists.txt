@@ -8,9 +8,13 @@ project(NoonCraft)
 add_executable(nooncraft "")
 
 # Path Hints to the Packages
-set(GLEW_ROOT ${CMAKE_SOURCE_DIR}/lib/glew-2.1.0)
-set(glfw3_ROOT ${CMAKE_SOURCE_DIR}/lib/glfw-3.2.1)
-set(glm_ROOT ${CMAKE_SOURCE_DIR}/lib/glm-0.9.9.3)
+if (WIN32)
+    set(GLEW_ROOT ${CMAKE_SOURCE_DIR}/lib/glew-2.1.0)
+    set(glfw3_ROOT ${CMAKE_SOURCE_DIR}/lib/glfw-3.2.1)
+    set(glm_ROOT ${CMAKE_SOURCE_DIR}/lib/glm-0.9.9.3)
+elseif (UNIX)
+    set(glfw3_ROOT /usr/local/Cellar/glfw/3.2.1)
+endif ()
 
 # Required Packages
 find_package(OpenGL REQUIRED)
@@ -43,7 +47,7 @@ PUBLIC
     src/camera/
     src/commands/
     src/events/
-    src/render/examples
+    src/render/examples/
     src/render/
     src/utils/
     src/world/
@@ -57,4 +61,4 @@ PUBLIC
 target_link_libraries(nooncraft
     ${OPENGL_gl_LIBRARY}
     ${GLEW_LIBRARIES}
-    ${GLFW_LIBRARIES})
+    glfw)

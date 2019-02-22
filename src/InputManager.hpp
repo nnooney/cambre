@@ -21,6 +21,12 @@
 #include "Event.hpp"
 #include "EventObserver.hpp"
 
+/// @class InputManager
+/// @brief A class that converts input events into game inputs.
+///
+/// This class handles the GLFW input methods and converts the data into an
+/// application event. It also is the subject of the observer pattern; it will
+/// notify all registered observers when an event occurs.
 class InputManager
 {
 public:
@@ -57,12 +63,16 @@ private:
     /// @brief The list of subscribers registered to each event.
     ///
     /// Each index in the vector corresponds to a single ApplicationEventEnum.
-    /// The vector stores a list of callbacks that will be called when the
-    /// corresponding event occurs. Every callback has the form:
-    ///    void callback(ApplicationEvent e);
+    /// The vector stores a list of observers that will be notified when the
+    /// corresponding event occurs.
     std::vector<std::list<EventObserver *>> mSubscribers;
 
     /// @brief The map of keys to events.
+    ///
+    /// This structure maps GLFW keys to Application Event Types. The index into
+    /// the vector is the key, and the value at that index is an event that is
+    /// mapped to that key. Note that this only allows for one event per key
+    /// input.
     std::vector<ApplicationEventEnum> mKeyEventMap;
 };
 

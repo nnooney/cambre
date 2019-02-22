@@ -17,6 +17,11 @@
 
 #include "RenderInterface.hpp"
 
+/// @class Chunk
+/// @brief A class to store several blocks.
+///
+/// This class groups related blocks into a single unit for the GPU to render.
+/// The number of blocks is determined by the static variable CHUNK_SIZE.
 class Chunk : public RenderInterface
 {
 public:

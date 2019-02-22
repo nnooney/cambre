@@ -20,6 +20,10 @@
 class ApplicationException : public std::runtime_error
 {
 public:
+    /// @brief The constructor.
+    ///
+    /// The constructor provides a method to pass a string into the exception so
+    /// that a unique message can be displayed when an error occurs.
     ApplicationException(std::string const &error) : std::runtime_error(error)
     {};
 };

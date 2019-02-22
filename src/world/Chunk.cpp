@@ -22,7 +22,8 @@ Chunk::Chunk(void)
         {
             for (int z = 0; z < CHUNK_SIZE; z++)
             {
-                mBlocks[x][y][z] = ((x * y * z) % 2 == 0) ? 1 : 0;
+                mBlocks[x][y][z] =
+                    ((x % 2 == 0) && (y % 2 == 0) && (z % 2 == 0)) ? 1 : 0;
             }
         }
     }

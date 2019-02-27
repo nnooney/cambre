@@ -41,7 +41,7 @@ Application::Application(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    mpWindow = glfwCreateWindow(640, 480, "Nooncraft", NULL, NULL);
+    mpWindow = glfwCreateWindow(640, 480, "Cambre", NULL, NULL);
     if (!mpWindow)
     {
         throw ApplicationException("GLFW Window Creation Failure");
@@ -92,6 +92,12 @@ void Application::run(void)
         renderer->initialize();
     }
 
+    // Perform UpdateInterface Initialization
+    for (UpdateInterface *updater : mUpdateInterfaces)
+    {
+        updater->initialize();
+    }
+
     // The main loop
     std::cout << "Beginning Main Loop ..." << std::endl;
     updateTime = glfwGetTime();
@@ -109,6 +115,8 @@ void Application::run(void)
         }
         else
         {
+            // Try to sleep for the remainder of the frame in order to reduce
+            // CPU usage.
             int ms = (updateTime - curTime) * 1000;
             if (ms > 0)
             {
@@ -122,6 +130,12 @@ void Application::run(void)
     for (RenderInterface *renderer : mRenderInterfaces)
     {
         renderer->wrapup();
+    }
+
+    // Perform UpdateInterface Wrapup
+    for (UpdateInterface *updater : mUpdateInterfaces)
+    {
+        updater->wrapup();
     }
 }
 
@@ -146,6 +160,11 @@ void Application::addRenderer(RenderInterface *renderer)
     mRenderInterfaces.push_back(renderer);
 }
 
+void Application::addUpdater(UpdateInterface *updater)
+{
+    mUpdateInterfaces.push_back(updater);
+}
+
 void Application::printVersionInfo(void)
 {
     int major, minor, revision;
@@ -164,10 +183,10 @@ void Application::update(void)
 {
     mCameraController.update();
 
-    // Perform RenderInterface Updating
-    for (RenderInterface *renderer : mRenderInterfaces)
+    // Perform UpdateInterface Updating
+    for (UpdateInterface *updater : mUpdateInterfaces)
     {
-        renderer->update();
+        updater->update();
     }
 
 

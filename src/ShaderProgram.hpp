@@ -7,8 +7,8 @@
 /// vertex shader and one fragment shader.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_SHADER_PROGRAM_H_
-#define _NOONCRAFT_SHADER_PROGRAM_H_
+#ifndef _CAMBRE_SHADER_PROGRAM_H_
+#define _CAMBRE_SHADER_PROGRAM_H_
 
 #include <string>
 

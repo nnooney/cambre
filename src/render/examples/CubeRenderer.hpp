@@ -5,8 +5,8 @@
 /// This class renders a cube, the basic building block of voxels.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_CUBE_RENDERER_H_
-#define _NOONCRAFT_CUBE_RENDERER_H_
+#ifndef _CAMBRE_CUBE_RENDERER_H_
+#define _CAMBRE_CUBE_RENDERER_H_
 
 #include "RenderInterface.hpp"
 

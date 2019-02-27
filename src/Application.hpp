@@ -7,8 +7,8 @@
 /// begins the application main loop.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_APPLICATION_H_
-#define _NOONCRAFT_APPLICATION_H_
+#ifndef _CAMBRE_APPLICATION_H_
+#define _CAMBRE_APPLICATION_H_
 
 #include <vector>
 
@@ -17,6 +17,7 @@
 
 #include "ShaderProgram.hpp"
 #include "RenderInterface.hpp"
+#include "UpdateInterface.hpp"
 #include "Camera.hpp"
 #include "CameraController.hpp"
 #include "InputManager.hpp"
@@ -54,8 +55,14 @@ public:
     /// @brief Add a RenderInterface to be rendered by the Application.
     ///
     /// This function adds a RenderInterface to the Application so that it will
-    /// be rendered when the run method is calld.
+    /// be rendered when the run method is called.
     void addRenderer(RenderInterface *renderer);
+
+    /// @brief Add an UpdateInterface to be updated by the Application.
+    ///
+    /// This function adds an UpdateInterface to the Application so that it will
+    /// be updated when the run method is called.
+    void addUpdater(UpdateInterface *updater);
 
     /// @brief Attaches an Input Manager to the Application's window.
     ///
@@ -79,6 +86,9 @@ private:
 
     /// @brief The RenderInterfaces that this application will render.
     std::vector<RenderInterface *> mRenderInterfaces;
+
+    /// @brief The UpdateInterfaces that this application will update.
+    std::vector<UpdateInterface *> mUpdateInterfaces;
 
     /// @brief The Camera Controller that gives life to the camera.
     CameraController mCameraController;

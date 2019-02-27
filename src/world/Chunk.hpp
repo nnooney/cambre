@@ -6,8 +6,8 @@
 /// responsible for rendering all the blocks via one call.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_CHUNK_H_
-#define _NOONCRAFT_CHUNK_H_
+#ifndef _CAMBRE_CHUNK_H_
+#define _CAMBRE_CHUNK_H_
 
 #include <cstdint>
 
@@ -15,14 +15,14 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
-#include "RenderInterface.hpp"
+#include "DynamicObjectInterface.hpp"
 
 /// @class Chunk
 /// @brief A class to store several blocks.
 ///
 /// This class groups related blocks into a single unit for the GPU to render.
 /// The number of blocks is determined by the static variable CHUNK_SIZE.
-class Chunk : public RenderInterface
+class Chunk : public DynamicObjectInterface
 {
 public:
     Chunk(void);

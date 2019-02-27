@@ -6,8 +6,8 @@
 /// that the user can move around.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_CAMERA_H_
-#define _NOONCRAFT_CAMERA_H_
+#ifndef _CAMBRE_CAMERA_H_
+#define _CAMBRE_CAMERA_H_
 
 #include <glm/glm.hpp>
 

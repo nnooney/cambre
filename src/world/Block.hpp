@@ -5,8 +5,8 @@
 /// This file contains the Block Class, the basic block of the world.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_BLOCK_H_
-#define _NOONCRAFT_BLOCK_H_
+#ifndef _CAMBRE_BLOCK_H_
+#define _CAMBRE_BLOCK_H_
 
 class Block
 {

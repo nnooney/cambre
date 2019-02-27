@@ -7,8 +7,8 @@
 /// resource initialization fails.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_APPLICATION_EXCEPTION_H_
-#define _NOONCRAFT_APPLICATION_EXCEPTION_H_
+#ifndef _CAMBRE_APPLICATION_EXCEPTION_H_
+#define _CAMBRE_APPLICATION_EXCEPTION_H_
 
 #include <exception>
 

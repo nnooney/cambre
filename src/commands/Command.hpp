@@ -5,8 +5,8 @@
 /// This class represents a generic command.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_COMMAND_H_
-#define _NOONCRAFT_COMMAND_H_
+#ifndef _CAMBRE_COMMAND_H_
+#define _CAMBRE_COMMAND_H_
 
 class Command
 {

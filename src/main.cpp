@@ -16,6 +16,7 @@ int main()
 
     Chunk chunk;
     app.addRenderer(&chunk);
+    app.addUpdater(&chunk);
 
     InputManager manager;
     app.registerInputs(manager);

@@ -6,8 +6,8 @@
 /// of these commands are generated and responded to by the InputManager.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_CAMERA_COMMANDS_H_
-#define _NOONCRAFT_CAMERA_COMMANDS_H_
+#ifndef _CAMBRE_CAMERA_COMMANDS_H_
+#define _CAMBRE_CAMERA_COMMANDS_H_
 
 #include <glm/glm.hpp>
 

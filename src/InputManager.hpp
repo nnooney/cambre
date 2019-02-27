@@ -9,8 +9,8 @@
 /// a series of events.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_INPUT_MANAGER_H_
-#define _NOONCRAFT_INPUT_MANAGER_H_
+#ifndef _CAMBRE_INPUT_MANAGER_H_
+#define _CAMBRE_INPUT_MANAGER_H_
 
 #include <list>
 #include <vector>

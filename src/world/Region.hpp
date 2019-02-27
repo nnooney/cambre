@@ -7,10 +7,12 @@
 /// as loading and unloading the chunks.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_REGION_H_
-#define _NOONCRAFT_REGION_H_
+#ifndef _CAMBRE_REGION_H_
+#define _CAMBRE_REGION_H_
 
-#include <vector>
+#include <unordered_map>
+
+#include <glm/glm.hpp>
 
 #include "Chunk.hpp"
 
@@ -26,8 +28,8 @@ public:
     Region(void);
 
 private:
-    /// @brief The array of chunks to render.
-    std::vector<Chunk> mChunks;
+    /// @brief The set of chunks managed by the Region.
+    std::unordered_map<glm::ivec3, Chunk*> mChunks;
 };
 
 #endif

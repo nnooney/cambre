@@ -5,8 +5,8 @@
 /// This file contains data that relates to events emitted by the input manager.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_EVENT_H_
-#define _NOONCRAFT_EVENT_H_
+#ifndef _CAMBRE_EVENT_H_
+#define _CAMBRE_EVENT_H_
 
 typedef enum ApplicationEventEnum
 {

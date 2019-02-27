@@ -5,8 +5,8 @@
 /// This file contains the basic Triangle Rendering example from OpenGL.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_TRIANGLE_RENDERER_H_
-#define _NOONCRAFT_TRIANGLE_RENDERER_H_
+#ifndef _CAMBRE_TRIANGLE_RENDERER_H_
+#define _CAMBRE_TRIANGLE_RENDERER_H_
 
 #include "RenderInterface.hpp"
 

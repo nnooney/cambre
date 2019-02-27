@@ -2,10 +2,10 @@ cmake_minimum_required (VERSION 3.13 FATAL_ERROR)
 
 set(CMAKE_CXX_STANDARD 11)
 
-project(NoonCraft)
+project(Cambre)
 
-# Declare the NoonCraft target
-add_executable(nooncraft "")
+# Declare the Cambre target
+add_executable(cambre "")
 
 # Path Hints to the Packages
 if (WIN32)
@@ -23,14 +23,14 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
 # Source Files
-target_sources(nooncraft
+target_sources(cambre
 PUBLIC
     src/camera/camera.cpp
     src/camera/CameraController.cpp
     src/commands/CameraCommands.cpp
     src/commands/Command.cpp
     src/events/EventObserver.cpp
-    src/render/RenderInterface.cpp
+    src/interface/LifecycleInterface.cpp
     src/render/examples/TriangleRenderer.cpp
     src/render/examples/CubeRenderer.cpp
     src/utils/CheckError.cpp
@@ -42,11 +42,12 @@ PUBLIC
     src/main.cpp)
 
 # Include Directories
-target_include_directories(nooncraft
+target_include_directories(cambre
 PUBLIC
     src/camera/
     src/commands/
     src/events/
+    src/interface/
     src/render/examples/
     src/render/
     src/utils/
@@ -58,7 +59,7 @@ PUBLIC
     ${GLM_INCLUDE_DIRS})
 
 # Link Libraries
-target_link_libraries(nooncraft
+target_link_libraries(cambre
     ${OPENGL_gl_LIBRARY}
     ${GLEW_LIBRARIES}
     glfw)

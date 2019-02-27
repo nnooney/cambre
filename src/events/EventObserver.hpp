@@ -7,8 +7,8 @@
 /// is one source of generating events.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_EVENT_OBSERVER_H_
-#define _NOONCRAFT_EVENT_OBSERVER_H_
+#ifndef _CAMBRE_EVENT_OBSERVER_H_
+#define _CAMBRE_EVENT_OBSERVER_H_
 
 #include "Event.hpp"
 

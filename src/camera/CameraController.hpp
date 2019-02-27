@@ -6,8 +6,8 @@
 /// commands that it forwards onto a Camera instance.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _NOONCRAFT_CAMERA_CONTROLLER_H_
-#define _NOONCRAFT_CAMERA_CONTROLLER_H_
+#ifndef _CAMBRE_CAMERA_CONTROLLER_H_
+#define _CAMBRE_CAMERA_CONTROLLER_H_
 
 #include <vector>
 

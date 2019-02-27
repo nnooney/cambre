@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-/// @file RenderInterface.cpp
+/// @file RenderInterface.hpp
 /// @brief The interface used by the Application class to render graphics.
 ///
 /// This file defines the interface methods available for applications to render
@@ -9,19 +9,20 @@
 /// execute until the Application is running.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "RenderInterface.hpp"
+#ifndef _CAMBRE_RENDER_INTERFACE_H_
+#define _CAMBRE_RENDER_INTERFACE_H_
 
-void RenderInterface::initialize(void)
-{
-    // Do nothing.
-}
+#include "LifecycleInterface.hpp"
 
-void RenderInterface::update(void)
+class RenderInterface : public virtual LifecycleInterface
 {
-    // Do nothing.
-}
+public:
+    /// @brief The render function, called each iteration of the main loop.
+    ///
+    /// This is the main function that a renderable object must implement in
+    /// order to be used by the application. It is called repeatedly in the main
+    /// display loop.
+    virtual void render(void) = 0;
+};
 
-void RenderInterface::wrapup(void)
-{
-    // Do nothing.
-}
+#endif

@@ -22,10 +22,21 @@ find_package(GLEW REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
+# Directories
+set(PROJECT_DIRECTORIES
+    src/camera/
+    src/commands/
+    src/events/
+    src/interface/
+    src/render/examples/
+    src/render/
+    src/utils/
+    src/world/
+    src/)
+
 # Source Files
-target_sources(cambre
-PUBLIC
-    src/camera/camera.cpp
+set(PROJECT_SOURCES
+    src/camera/Camera.cpp
     src/camera/CameraController.cpp
     src/commands/CameraCommands.cpp
     src/commands/Command.cpp
@@ -36,23 +47,47 @@ PUBLIC
     src/utils/CheckError.cpp
     src/utils/PrintVector.cpp
     src/world/Chunk.cpp
-    src/ShaderProgram.cpp
-    src/InputManager.cpp
+    src/world/Region.cpp
     src/Application.cpp
-    src/main.cpp)
+    src/InputManager.cpp
+    src/main.cpp
+    src/ShaderProgram.cpp)
+
+# Header Files
+set(PROJECT_HEADERS
+    src/camera/Camera.hpp
+    src/camera/CameraController.hpp
+    src/commands/CameraCommands.hpp
+    src/commands/Command.hpp
+    src/events/Event.hpp
+    src/events/EventObserver.hpp
+    src/interface/DynamicObjectInterface.hpp
+    src/interface/LifecycleInterface.hpp
+    src/interface/RenderInterface.hpp
+    src/interface/UpdateInterface.hpp
+    src/render/examples/TriangleRenderer.hpp
+    src/render/examples/CubeRenderer.hpp
+    src/utils/CheckError.hpp
+    src/utils/PrintVector.hpp
+    src/utils/Specialization.hpp
+    src/world/Block.hpp
+    src/world/Chunk.hpp
+    src/world/Region.hpp
+    src/Application.hpp
+    src/ApplicationException.hpp
+    src/InputManager.hpp
+    src/ShaderProgram.hpp)
+
+# Sources
+target_sources(cambre
+PUBLIC
+    ${PROJECT_SOURCES}
+    ${PROJECT_HEADERS})
 
 # Include Directories
 target_include_directories(cambre
 PUBLIC
-    src/camera/
-    src/commands/
-    src/events/
-    src/interface/
-    src/render/examples/
-    src/render/
-    src/utils/
-    src/world/
-    src/
+    ${PROJECT_DIRECTORIES}
     ${OPENGL_INCLUDE_DIRS}
     ${GLEW_INCLUDE_DIRS}
     ${GLFW_INCLUDE_DIRS}

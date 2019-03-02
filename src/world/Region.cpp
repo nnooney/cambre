@@ -13,3 +13,23 @@ Region::Region(void)
 {
 
 }
+
+Region::~Region(void)
+{
+
+}
+
+void Region::initialize(void)
+{
+
+}
+
+void Region::update(void)
+{
+
+}
+
+void Region::render(void)
+{
+
+}

@@ -16,6 +16,7 @@
 
 #include "Chunk.hpp"
 #include "DynamicObjectInterface.hpp"
+#include "Specialization.hpp"
 
 /// @class Region
 /// @brief A class to handle multiple chunks.

@@ -7,8 +7,8 @@
 /// begins the application main loop.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
 #include <chrono>
+#include <iostream>
 #include <thread>
 
 #include <glm/glm.hpp>
@@ -86,17 +86,8 @@ void Application::run(void)
 
     mUniformMVP = glGetUniformLocation(mShaderProgram.getProgram(), "MVP");
 
-    // Perform RenderInterface Initialization
-    for (RenderInterface *renderer : mRenderInterfaces)
-    {
-        renderer->initialize();
-    }
-
-    // Perform UpdateInterface Initialization
-    for (UpdateInterface *updater : mUpdateInterfaces)
-    {
-        updater->initialize();
-    }
+    // Initialize necessary resources
+    initialize();
 
     // The main loop
     std::cout << "Beginning Main Loop ..." << std::endl;
@@ -126,17 +117,8 @@ void Application::run(void)
     }
     std::cout << "Exiting Main Loop ..." << std::endl;
 
-    // Perform RenderInterface Wrapup
-    for (RenderInterface *renderer : mRenderInterfaces)
-    {
-        renderer->wrapup();
-    }
-
-    // Perform UpdateInterface Wrapup
-    for (UpdateInterface *updater : mUpdateInterfaces)
-    {
-        updater->wrapup();
-    }
+    // Wrapup necessary resources
+    wrapup();
 }
 
 void Application::useShader(ShaderProgram shader)
@@ -165,6 +147,12 @@ void Application::addUpdater(UpdateInterface *updater)
     mUpdateInterfaces.push_back(updater);
 }
 
+void Application::addDynamicObject(DynamicObjectInterface *object)
+{
+    addRenderer(object);
+    addUpdater(object);
+}
+
 void Application::printVersionInfo(void)
 {
     int major, minor, revision;
@@ -177,6 +165,21 @@ void Application::printVersionInfo(void)
 
     std::cout << "GLM Version " << GLM_VERSION_MAJOR << "." << GLM_VERSION_MINOR
         << "." << GLM_VERSION_PATCH << "." << GLM_VERSION_REVISION << std::endl;
+}
+
+void Application::initialize(void)
+{
+    // Perform RenderInterface Initialization
+    for (RenderInterface *renderer : mRenderInterfaces)
+    {
+        renderer->initialize();
+    }
+
+    // Perform UpdateInterface Initialization
+    for (UpdateInterface *updater : mUpdateInterfaces)
+    {
+        updater->initialize();
+    }
 }
 
 void Application::update(void)
@@ -217,6 +220,21 @@ void Application::render(void)
     }
 
     glfwSwapBuffers(mpWindow);
+}
+
+void Application::wrapup(void)
+{
+    // Perform RenderInterface Wrapup
+    for (RenderInterface *renderer : mRenderInterfaces)
+    {
+        renderer->wrapup();
+    }
+
+    // Perform UpdateInterface Wrapup
+    for (UpdateInterface *updater : mUpdateInterfaces)
+    {
+        updater->wrapup();
+    }
 }
 
 void Application::KeyCallback(GLFWwindow *window, int key, int scancode,

@@ -1,9 +1,7 @@
 #include "Application.hpp"
-#include "ShaderProgram.hpp"
-#include "TriangleRenderer.hpp"
-#include "CubeRenderer.hpp"
 #include "Chunk.hpp"
 #include "InputManager.hpp"
+#include "ShaderProgram.hpp"
 
 int main()
 {

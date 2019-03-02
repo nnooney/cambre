@@ -18,7 +18,7 @@
 #include "ShaderProgram.hpp"
 #include "RenderInterface.hpp"
 #include "UpdateInterface.hpp"
-#include "Camera.hpp"
+#include "DynamicObjectInterface.hpp"
 #include "CameraController.hpp"
 #include "InputManager.hpp"
 
@@ -64,6 +64,12 @@ public:
     /// be updated when the run method is called.
     void addUpdater(UpdateInterface *updater);
 
+    /// @brief Add a DynamicObjectInterface to the Application.
+    ///
+    /// This funciton adds a DynamicObjectInterface to the Application. It will
+    /// attach to both the render and update loops.
+    void addDynamicObject(DynamicObjectInterface *object);
+
     /// @brief Attaches an Input Manager to the Application's window.
     ///
     /// This function will register an input manager's low-level functions with
@@ -100,6 +106,13 @@ private:
     /// can only be one InputManager.
     static InputManager mInputManager;
 
+    /// @brief The Application's Initialization routine.
+    ///
+    /// This function gets called prior to entering the main loop. It will
+    /// perform the initialization of all resources that have registered with
+    /// the application.
+    void initialize(void);
+
     /// @brief The Global Update Loop.
     ///
     /// This function is the entrypoint for running the game logic one step. It
@@ -111,6 +124,12 @@ private:
     /// This function is the entrypoint for rendering the current game state. It
     /// is a part of the application loop.
     void render(void);
+
+    /// @brief The Application's Wrapup routine.
+    ///
+    /// This function gets called after exiting the main loop. It will wrapup
+    /// any resources that were used in the main loop.
+    void wrapup(void);
 
     /// @brief The low-level key callback.
     ///

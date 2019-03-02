@@ -63,3 +63,10 @@ target_link_libraries(cambre
     ${OPENGL_gl_LIBRARY}
     ${GLEW_LIBRARIES}
     glfw)
+
+# Compiler Options
+if (UNIX)
+    target_compile_options(cambre
+    PRIVATE
+        -Wall)
+endif ()

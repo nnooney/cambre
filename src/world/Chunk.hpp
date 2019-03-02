@@ -27,8 +27,8 @@ class Chunk : public DynamicObjectInterface
 public:
     Chunk(void);
     ~Chunk(void);
-    void update(void);
     void initialize(void);
+    void update(void);
     void render(void);
 private:
     static const int CHUNK_SIZE = 16;

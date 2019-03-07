@@ -15,6 +15,26 @@ Chunk::Chunk(void)
     mVao = 0;
     mVbo = 0;
     mUpdateRequired = true;
+    mx = my = mz = 0;
+
+    for (int x = 0; x < CHUNK_SIZE; x++)
+    {
+        for (int y = 0; y < CHUNK_SIZE; y++)
+        {
+            for (int z = 0; z < CHUNK_SIZE; z++)
+            {
+                mBlocks[x][y][z] =
+                    ((x % 2 == 0) && (y % 2 == 0) && (z % 2 == 0)) ? 1 : 0;
+            }
+        }
+    }
+}
+
+Chunk::Chunk(int x, int y, int z) : mx(x), my(y), mz(z)
+{
+    mVao = 0;
+    mVbo = 0;
+    mUpdateRequired = true;
 
     for (int x = 0; x < CHUNK_SIZE; x++)
     {

@@ -26,12 +26,21 @@ class Chunk : public DynamicObjectInterface
 {
 public:
     Chunk(void);
-    ~Chunk(void);
+    Chunk(int x, int y, int z);
+    virtual ~Chunk(void);
     void initialize(void);
     void update(void);
     void render(void);
-private:
+
     static const int CHUNK_SIZE = 16;
+
+private:
+    /// @brief The coordinates of this chunk in the world.
+    int mx;
+    int my;
+    int mz;
+
+    /// @brief The array of blocks belonging to this chunk.
     uint8_t mBlocks[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
 
     /// @brief The OpenGL Vertex Array Object

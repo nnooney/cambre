@@ -5,5 +5,9 @@ out vec4 FragColor;
 
 void main()
 {
-    FragColor = vec4(Color.x / 16.0, Color.y / 16.0, Color.z / 16.0, 1.0);
+    FragColor = vec4(
+        (int(Color.x) % 16) / 16.0,
+        (int(Color.y) % 16) / 16.0,
+        (int(Color.z) % 16) / 16.0,
+        1.0);
 }

@@ -1,5 +1,5 @@
 #include "Application.hpp"
-#include "Chunk.hpp"
+#include "Region.hpp"
 #include "InputManager.hpp"
 #include "ShaderProgram.hpp"
 
@@ -10,13 +10,13 @@ int main()
     ShaderProgram shader(
         "./src/render/shaders/chunk.v.glsl",
         "./src/render/shaders/chunk.f.glsl");
-    app.useShader(shader);
 
-    Chunk chunk;
-    app.addRenderer(&chunk);
-    app.addUpdater(&chunk);
+    Region r;
+    r.useShader(shader);
+    app.addDynamicObject(&r);
 
     InputManager manager;
+    r.getCameraController()->registerWith(&manager);
     app.registerInputs(manager);
 
     app.printVersionInfo();

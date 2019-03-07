@@ -15,11 +15,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "ShaderProgram.hpp"
 #include "RenderInterface.hpp"
 #include "UpdateInterface.hpp"
 #include "DynamicObjectInterface.hpp"
-#include "CameraController.hpp"
 #include "InputManager.hpp"
 
 /// @class Application
@@ -46,11 +44,6 @@ public:
     /// The main application loop listens for input events and renders the
     /// scene.
     void run(void);
-
-    /// @brief Use the ShaderProgram for rendering the application.
-    ///
-    /// This call saves the shader program for rendering via the application.
-    void useShader(ShaderProgram shader);
 
     /// @brief Add a RenderInterface to be rendered by the Application.
     ///
@@ -86,18 +79,11 @@ private:
     /// @brief The GLFW Window instance.
     GLFWwindow *mpWindow;
 
-    /// @brief The Shader Program used by this application.
-    ShaderProgram mShaderProgram;
-    GLuint mUniformMVP;
-
     /// @brief The RenderInterfaces that this application will render.
     std::vector<RenderInterface *> mRenderInterfaces;
 
     /// @brief The UpdateInterfaces that this application will update.
     std::vector<UpdateInterface *> mUpdateInterfaces;
-
-    /// @brief The Camera Controller that gives life to the camera.
-    CameraController mCameraController;
 
     /// @brief The InputManager to handle user input.
     ///

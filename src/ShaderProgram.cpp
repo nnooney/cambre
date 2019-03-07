@@ -202,7 +202,7 @@ bool ShaderProgram::linkProgram(void)
     return true;
 }
 
-void ShaderProgram::activate(void)
+void ShaderProgram::use(void)
 {
     // Do not activate unless the program is ready.
     if (isReadyToUse() != true)
@@ -218,6 +218,17 @@ void ShaderProgram::activate(void)
 GLint ShaderProgram::getProgram(void)
 {
     return mProgram;
+}
+
+GLuint ShaderProgram::getUniformLocation(std::string uniform)
+{
+    GLuint loc = glGetUniformLocation(mProgram, uniform.c_str());
+    if (loc == GL_INVALID_INDEX)
+    {
+        std::cerr << "ShaderProgram: unable to find uniform " << uniform <<
+            std::endl;
+    }
+    return loc;
 }
 
 ShaderProgram& ShaderProgram::operator=(const ShaderProgram& other)

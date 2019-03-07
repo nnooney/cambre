@@ -41,7 +41,7 @@ Application::Application(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    mpWindow = glfwCreateWindow(640, 480, "Cambre", NULL, NULL);
+    mpWindow = glfwCreateWindow(800, 800, "Cambre", NULL, NULL);
     if (!mpWindow)
     {
         throw ApplicationException("GLFW Window Creation Failure");
@@ -69,7 +69,6 @@ Application::~Application(void)
 void Application::registerInputs(InputManager manager)
 {
     mInputManager = manager;
-    mCameraController.registerWith(&mInputManager);
 
     glfwSetKeyCallback(mpWindow, KeyCallback);
     glfwSetInputMode(mpWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -83,8 +82,6 @@ void Application::run(void)
 
     // Configure OpenGL
     glEnable(GL_DEPTH_TEST);
-
-    mUniformMVP = glGetUniformLocation(mShaderProgram.getProgram(), "MVP");
 
     // Initialize necessary resources
     initialize();
@@ -119,22 +116,6 @@ void Application::run(void)
 
     // Wrapup necessary resources
     wrapup();
-}
-
-void Application::useShader(ShaderProgram shader)
-{
-    // Ensure that the shader is ready to be used.
-    if (shader.isReadyToUse() != true)
-    {
-        std::cerr << "Application Shader is not ready to use" << std::endl;
-        return;
-    }
-
-    // Save the shader reference being used.
-    mShaderProgram = shader;
-
-    // Indicate that the program is being used for OpenGL.
-    mShaderProgram.activate();
 }
 
 void Application::addRenderer(RenderInterface *renderer)
@@ -184,8 +165,6 @@ void Application::initialize(void)
 
 void Application::update(void)
 {
-    mCameraController.update();
-
     // Perform UpdateInterface Updating
     for (UpdateInterface *updater : mUpdateInterfaces)
     {
@@ -201,17 +180,9 @@ void Application::render(void)
     GLint width, height;
 
     glfwGetFramebufferSize(mpWindow, &width, &height);
-    GLfloat aspectRatio = (float)width/height;
     glViewport(0, 0, width, height);
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glUseProgram(mShaderProgram.getProgram());
-
-    glm::mat4 view = mCameraController.getView();
-    glm::mat4 proj = glm::perspective(
-        glm::radians(45.0f), aspectRatio, 0.1f, 100.0f);
-    glUniformMatrix4fv(mUniformMVP, 1, GL_FALSE, glm::value_ptr(proj * view));
 
     // Perform RenderInterface Rendering
     for (RenderInterface *renderer : mRenderInterfaces)

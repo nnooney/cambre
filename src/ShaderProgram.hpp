@@ -86,12 +86,17 @@ public:
     /// @brief Activeates the Program for use in the OpenGL pipeline.
     ///
     /// This function will make the ShaderProgram the active program.
-    void activate(void);
+    void use(void);
 
     /// @brief Gets the program variable for use with OpenGL render functions.
     ///
     /// This function is a getter for mProgram.
     GLint getProgram(void);
+
+    /// @brief Gets the location of a uniform in the program.
+    ///
+    /// The function retrieves a uniform location in the program.
+    GLuint getUniformLocation(std::string uniform);
 
     /// @brief The overloaded assignment operator.
     ///

@@ -14,8 +14,10 @@
 
 #include <glm/glm.hpp>
 
+#include "CameraController.hpp"
 #include "Chunk.hpp"
 #include "DynamicObjectInterface.hpp"
+#include "ShaderProgram.hpp"
 #include "Specialization.hpp"
 
 /// @class Region
@@ -32,9 +34,28 @@ public:
     void initialize(void);
     void update(void);
     void render(void);
+
+    /// @brief Use the ShaderProgram for rendering.
+    ///
+    /// This call sets the shader for use when rendering the region.
+    void useShader(ShaderProgram shader);
+
+    /// @brief Return a reference to the Camera Controller.
+    ///
+    /// This function is a getter for mCameraController.
+    CameraController* getCameraController(void);
+
 private:
     /// @brief The set of chunks managed by the Region.
     std::unordered_map<glm::ivec3, Chunk*> mChunks;
+
+    /// @brief The Shader Program used by this application.
+    ShaderProgram mShaderProgram;
+    GLuint mUniformVP;
+    GLuint mUniformModel;
+
+    /// @brief The Camera Controller that gives life to the camera.
+    CameraController mCameraController;
 };
 
 #endif

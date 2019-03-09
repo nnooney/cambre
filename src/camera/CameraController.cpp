@@ -6,6 +6,8 @@
 /// commands that it forwards onto a Camera instance.
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <iostream>
+
 #include "CameraCommands.hpp"
 #include "InputManager.hpp"
 
@@ -20,15 +22,15 @@ CameraController::CameraController(void)
     mEventStates.resize(AE_MAX_EVENT_ENUM);
 }
 
-void CameraController::registerWith(InputManager *manager)
+void CameraController::registerWith(InputManager &manager)
 {
-    manager->RegisterInput(AE_MOVE_FORWARD, this);
-    manager->RegisterInput(AE_MOVE_BACKWARD, this);
-    manager->RegisterInput(AE_MOVE_LEFT, this);
-    manager->RegisterInput(AE_MOVE_RIGHT, this);
-    manager->RegisterInput(AE_MOVE_UP, this);
-    manager->RegisterInput(AE_MOVE_DOWN, this);
-    manager->RegisterInput(AE_LOOK_AROUND, this);
+    manager.RegisterInput(AE_MOVE_FORWARD, this);
+    manager.RegisterInput(AE_MOVE_BACKWARD, this);
+    manager.RegisterInput(AE_MOVE_LEFT, this);
+    manager.RegisterInput(AE_MOVE_RIGHT, this);
+    manager.RegisterInput(AE_MOVE_UP, this);
+    manager.RegisterInput(AE_MOVE_DOWN, this);
+    manager.RegisterInput(AE_LOOK_AROUND, this);
 }
 
 void CameraController::onEvent(ApplicationEventStruct event)

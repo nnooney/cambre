@@ -67,7 +67,7 @@ public:
     ///
     /// This function will register an input manager's low-level functions with
     /// the application's window.
-    void registerInputs(InputManager manager);
+    void registerInputs(InputManager &manager);
 
     /// @brief Prints the version info for the application.
     ///

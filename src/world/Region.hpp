@@ -17,6 +17,7 @@
 #include "CameraController.hpp"
 #include "Chunk.hpp"
 #include "DynamicObjectInterface.hpp"
+#include "InputManager.hpp"
 #include "ShaderProgram.hpp"
 #include "Specialization.hpp"
 
@@ -38,12 +39,18 @@ public:
     /// @brief Use the ShaderProgram for rendering.
     ///
     /// This call sets the shader for use when rendering the region.
-    void useShader(ShaderProgram shader);
+    void useShader(ShaderProgram &shader);
 
-    /// @brief Return a reference to the Camera Controller.
+    /// @brief Use the CameraController for rendering.
     ///
-    /// This function is a getter for mCameraController.
-    CameraController* getCameraController(void);
+    /// This call sets the camera controller for use when rendering the region.
+    void useCameraController(CameraController &cc);
+
+    /// @brief Register to listen for inputs.
+    ///
+    /// This function attaches the region to an input manager so it can be
+    /// updated via user input.
+    void registerWith(InputManager &manager);
 
 private:
     /// @brief The set of chunks managed by the Region.

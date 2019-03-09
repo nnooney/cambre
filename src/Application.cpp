@@ -66,7 +66,7 @@ Application::~Application(void)
     glfwTerminate();
 }
 
-void Application::registerInputs(InputManager manager)
+void Application::registerInputs(InputManager &manager)
 {
     mInputManager = manager;
 

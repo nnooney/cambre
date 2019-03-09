@@ -19,7 +19,7 @@ class CameraController : public EventObserver
 {
 public:
     CameraController(void);
-    void registerWith(InputManager *manager);
+    void registerWith(InputManager &manager);
     virtual void onEvent(ApplicationEventStruct event);
     void update(void);
     glm::mat4 getView(void);

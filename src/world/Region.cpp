@@ -78,12 +78,13 @@ void Region::render(void)
     }
 }
 
-void Region::useShader(ShaderProgram shader)
+void Region::useShader(ShaderProgram &shader)
 {
     // Ensure that the shader is ready to be used.
     if (shader.isReadyToUse() != true)
     {
-        std::cerr << "Region::useShader Shader is not ready to use" << std::endl;
+        std::cerr << "Region::useShader Shader is not ready to use"
+            << std::endl;
         return;
     }
 
@@ -94,7 +95,12 @@ void Region::useShader(ShaderProgram shader)
     mShaderProgram.use();
 }
 
-CameraController* Region::getCameraController(void)
+void Region::useCameraController(CameraController &cc)
 {
-    return &mCameraController;
+    mCameraController = cc;
+}
+
+void Region::registerWith(InputManager &manager)
+{
+    mCameraController.registerWith(manager);
 }

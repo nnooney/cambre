@@ -23,6 +23,7 @@ public:
     virtual void onEvent(ApplicationEventStruct event);
     void update(void);
     glm::mat4 getView(void);
+    glm::vec3 getPosition(void);
 
 private:
     Camera mCamera;

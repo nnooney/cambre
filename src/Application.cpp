@@ -79,6 +79,7 @@ void Application::run(void)
 {
     double curTime, updateTime;
     const double delta = 1.0/60.0;
+    unsigned int skipFrames = 0;
 
     // Configure OpenGL
     glEnable(GL_DEPTH_TEST);
@@ -96,9 +97,14 @@ void Application::run(void)
         {
             updateTime += delta;
             update();
-            if (curTime < updateTime)
+            if ((curTime < updateTime) || (skipFrames > 10))
             {
                 render();
+                skipFrames = 0;
+            }
+            else
+            {
+                skipFrames++;
             }
         }
         else

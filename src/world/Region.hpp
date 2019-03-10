@@ -10,6 +10,7 @@
 #ifndef _CAMBRE_REGION_H_
 #define _CAMBRE_REGION_H_
 
+#include <queue>
 #include <unordered_map>
 
 #include <glm/glm.hpp>
@@ -56,6 +57,17 @@ private:
     /// @brief The set of chunks managed by the Region.
     std::unordered_map<glm::ivec3, Chunk*> mChunks;
 
+    /// @brief The distance used to render chunks.
+    unsigned int mChunkDistance;
+
+    /// @brief The rate used to load/unload chunks.
+    unsigned int mChunkLoadRate;
+    unsigned int mChunkUnloadRate;
+
+    /// @brief The queues used to keep track of chunks to load and unload.
+    std::queue<glm::ivec3> mChunkLoadList;
+    std::queue<glm::ivec3> mChunkRemoveList;
+
     /// @brief The Shader Program used by this application.
     ShaderProgram mShaderProgram;
     GLuint mUniformVP;
@@ -63,6 +75,30 @@ private:
 
     /// @brief The Camera Controller that gives life to the camera.
     CameraController mCameraController;
+
+    /// @brief Checks a chunk and it's neighbors for loading/unloading.
+    ///
+    /// This function is used to mark chunks for loading/unloading.
+    void updateChunkLists(std::pair<glm::ivec3, Chunk*> ci);
+
+    /// @brief The load algorithm for chunk loading/unloading.
+    ///
+    /// This function represents the algorithm for loading or unloading a chunk.
+    /// Given a chunk's coordinates, this function will return true if the
+    /// chunk should be loaded, or false if the chunk should be unloaded.
+    bool chunkLoadAlgorithm(glm::ivec3 coords);
+
+    /// @brief Loads chunks from the chunk load list.
+    ///
+    /// This function will load chunks from the list and insert them into the
+    /// chunk map.
+    void loadChunks(void);
+
+    /// @brief Unloads chunks from the map.
+    ///
+    /// This function will unload chunks from the map based upon the chunk
+    /// remove list.
+    void unloadChunks(void);
 };
 
 #endif

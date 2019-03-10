@@ -62,6 +62,11 @@ glm::mat4 CameraController::getView(void)
     return mCamera.getView();
 }
 
+glm::vec3 CameraController::getPosition(void)
+{
+    return mCamera.getPosition();
+}
+
 void CameraController::updatePosition(void)
 {
     glm::vec3 position = mCamera.getPosition();

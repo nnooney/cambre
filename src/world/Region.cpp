@@ -16,7 +16,7 @@
 
 Region::Region(void)
 {
-    mChunkDistance = 64;
+    mChunkDistance = 256;
     mChunkLoadRate = 10;
     mChunkUnloadRate = 10;
 
@@ -73,7 +73,7 @@ void Region::render(void)
 {
     glm::mat4 view = mCameraController.getView();
     glm::mat4 proj = glm::perspective(
-        glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
+        glm::radians(45.0f), 1.0f, 0.1f, 256.0f);
     glUniformMatrix4fv(mUniformVP, 1, GL_FALSE, glm::value_ptr(proj * view));
 
     for (std::pair<glm::ivec3, Chunk *> p : mChunks)

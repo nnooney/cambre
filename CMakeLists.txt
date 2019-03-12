@@ -47,6 +47,7 @@ set(PROJECT_SOURCES
     src/utils/CheckError.cpp
     src/utils/PrintVector.cpp
     src/world/Chunk.cpp
+    src/world/ChunkMesher.cpp
     src/world/Region.cpp
     src/Application.cpp
     src/InputManager.cpp

@@ -17,8 +17,8 @@
 Region::Region(void)
 {
     mChunkDistance = 256;
-    mChunkLoadRate = 10;
-    mChunkUnloadRate = 10;
+    mChunkLoadRate = 25;
+    mChunkUnloadRate = 25;
 
     mChunks.insert({glm::ivec3(0, 0, 0), new Chunk(0, 0, 0)});
 }
@@ -66,7 +66,6 @@ void Region::update(void)
     // Add and Remove Chunks from the hashmap.
     unloadChunks();
     loadChunks();
-
 }
 
 void Region::render(void)

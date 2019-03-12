@@ -11,10 +11,9 @@
 
 #include <cstdint>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
+#include "ChunkMesher.hpp"
 #include "DynamicObjectInterface.hpp"
 
 /// @class Chunk
@@ -82,16 +81,6 @@ private:
     /// @brief The array of blocks belonging to this chunk.
     uint8_t mBlocks[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
 
-    /// @brief The OpenGL Vertex Array Object
-    GLuint mVao;
-
-    /// @brief The OpenGL Vertex Buffer Object
-    GLuint mVbo;
-
-    /// @brief The Mesh Data for the VBO.
-    glm::tvec4<GLbyte> mMeshData[CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE * 36];
-    int mMeshElements;
-
     /// @brief A flag indicating updates need to occur.
     bool mUpdateRequired;
 
@@ -100,6 +89,9 @@ private:
     /// This struct stores information about the neighboring chunks, which
     /// allows for quick access when updating.
     struct ChunkNeighborsStruct mNeighbors;
+
+    /// @brief The mesher for the chunk.
+    ChunkMesher mChunkMesher;
 };
 
 #endif
